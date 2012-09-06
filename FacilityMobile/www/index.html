@@ -5,26 +5,39 @@
 	<link type='text/css' rel='stylesheet' href='css/jquery.mobile.css' />
 	<script src="scripts/jquery.js"></script>
 	<script src="scripts/jquery.mobile.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+	});
+	</script>
 	<body>
 		<div data-role="page" id="index" data-title="Indice" align="center">
-			<table id="dashboard">
-				<tr>
-					<td ><img src="icons/yopuedo.png" width="60px" height="60px"> <br>Yo Puedo</td>
-					<td><img src="icons/economicos.png" width="60px" height="60px"> <br>Economicos</td>
-				</tr>
-				<tr>
-					<td><img src="icons/personas.png" width="60px" height="60px"> <br>Personas</td>
-					<td><img src="icons/produccion.png" width="60px" height="60px"> <br>Produccion</td>
-				</tr>
-				<tr>
-					<td><img src="icons/comercial.png" width="60px" height="60px"> <br>Comerciales</td>
-					<td><img src="icons/sociales.png" width="60px" height="60px"> <br>Sociales</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td><img src="icons/emergency.png" width="60px" height="60px"> <br>Emergencias</td>
-				</tr>				
-			</table>
+			<div data-role="header" data-theme="b" style="text-align: center;">
+				<img src="images/logo.png" ></img>
+			</div>
+			<div data-role="content" data-theme="a">
+				<table id="dashboard">
+					<tr>
+						<td ><img src="icons/yopuedo.png" width="60px" height="60px"> <br>Yo Puedo</td>
+						<td><img src="icons/economicos.png" width="60px" height="60px"> <br>Economicos</td>
+					</tr>
+					<tr>
+						<td><img src="icons/personas.png" width="60px" height="60px"> <br>Personas</td>
+						<td><img src="icons/produccion.png" width="60px" height="60px"> <br>Produccion</td>
+					</tr>
+					<tr>
+						<td><img src="icons/comercial.png" width="60px" height="60px"> <br>Comerciales</td>
+						<td><img src="icons/sociales.png" width="60px" height="60px"> <br>Sociales</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><img src="icons/emergency.png" width="60px" height="60px"> <br>Emergencias</td>
+					</tr>				
+				</table>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>Powered by Eje Digital</h4>
+			</div>		
 		</div>
 	</body>
 </html>
