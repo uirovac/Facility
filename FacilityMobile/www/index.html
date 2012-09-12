@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link type='text/css' rel='stylesheet' href='css/dashboard.css' />
-	<link type='text/css'	 rel='stylesheet' href='css/jquery.mobile.css' />
-	<script src="scripts/jquery.js"></script>
-	<script src="scripts/jquery.mobile.js"></script>
-	<script type="text/javascript">
-	 $(document).ready(function() {
-		alert("Hola");
-	 }
-	 
-	</script>
-	<body onload="alert("Hola2")">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link type='text/css' rel='stylesheet' href='css/dashboard.css' />
+		<link type='text/css' rel='stylesheet' href='css/jquery.mobile.css' />
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jquery.mobile.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('a#close').click(function() {
+					$('#message').hide('slow');
+					$("#index").show("slow");
+				})	
+			});		
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			if (!!window.EventSource) {
+				var eventSrc = new EventSource('http://facility.ejedigital.cl/facility/dispatcher?c=DisplayMessage&m=daily' );
+				eventSrc.addEventListener('message',
+					function(e) {
+						document.getElementById("contenido").innerHTML = "";
+						var mensaje = "";
+						var data = JSON.parse(e.data);
+						var mensaje = "<p>" + data.asunto + "</p></br>";
+						mensaje += "<p>" + data.msg + "</p></br>";
+						if(mensaje != "") {
+							document.getElementById("contenido").innerHTML = mensaje;
+							$("#message").show("slow");
+							$("#index").hide("slow");
+						}
+					}, false);
+				eventSrc.addEventListener('open', 
+					function(e) { document.getElementById("contenido").innerHTML = "conexion abierta";
+					}, false);
+				eventSrc.addEventListener('error', 
+					function(e) {
+						if (e.readyState == EventSource.CLOSED) {
+							document.getElementById("contenido").innerHTML = "conexion cerrada";
+						}
+					}, false);				
+			}
+			else {
+				document.getElementById("contenido").innerHTML = "Funcionalidad no soportada por el browser";
+			}
+		</script>
 		<div data-role="page" id="index" data-title="HomePage" align="center">
 			<div data-role="header" data-theme="a" style="text-align: center;">
 				<img src="images/logo.png" ></img>
@@ -19,7 +53,7 @@
 			<div data-role="content" data-theme="b">
 				<table id="dashboard">
 					<tr>
-						<td ><img src="icons/yopuedo.png" width="50px" height="50px" onclick="alert('3');"><br>Yo Puedo</td>
+						<td ><a href="#message"><img src="icons/yopuedo.png" width="50px" height="50px"></a><br>Yo Puedo</td>
 						<td><img src="icons/economicos.png" width="50px" height="50px"> <br>Economicos</td>
 					</tr>
 					<tr>
@@ -37,8 +71,16 @@
 				</table>
 			</div>
 			<div data-role="footer" data-theme="a">
-				<h4>Powered by Eje Digital</h4>
+				<h4><a href="http://ejedigital.cl">Powered by Eje Digital</a></h4>
 			</div>		
-		</div>
+		</div> <!-- Fin página -->
+		
+		<!-- Página con mensaje -->
+		<div data-role="page" id="message" data-title="Mensaje Diario" align="center">
+			<div data-role="content" data-theme="b">
+				<div id="contenido"></div>
+				<p><a href="#index" id="close" data-direction="reverse" data-role="button" data-theme="b">Volver al principal</a></p>
+			</div>
+		</div> <!-- Fin página -->
 	</body>
 </html>
